@@ -10,10 +10,16 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    pacman.cpp \
+    pared.cpp \
+    puntos.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    pacman.h \
+    pared.h \
+    puntos.h
 
 FORMS += \
     mainwindow.ui
@@ -22,3 +28,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    imagenes.qrc

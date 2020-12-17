@@ -2,6 +2,25 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTimer>
+#include <iostream>
+#include <string>
+#include <QPainter>
+#include <QGraphicsItem>
+#include <QRectF>
+#include <QDesktopWidget>
+#include <QDebug>
+#include <QGraphicsScene>
+#include <QKeyEvent>
+#include <conio.h>
+#include <QMessageBox>
+
+
+#include "pacman.h"
+#include "pared.h"
+#include "puntos.h"
+
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -15,7 +34,25 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    QList<pared *> laberito;
+    QList<puntos *> monedas;
+
+private slots:
+
+
 private:
+
     Ui::MainWindow *ui;
+
+    QGraphicsScene *scene;
+    pacman *Pacman;
+
+    float x, y, ancho, alto;
+    int puntajes = 0, num = 0;
+
+    void keyPressEvent(QKeyEvent *evento);
+    QTimer *timerE;
+
+
 };
 #endif // MAINWINDOW_H
