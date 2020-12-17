@@ -40,6 +40,8 @@ public:
 private slots:
 
 
+
+
 private:
 
     Ui::MainWindow *ui;
@@ -48,7 +50,7 @@ private:
     pacman *Pacman;
 
     float x, y, ancho, alto;
-    int puntajes = 0, num = 0;
+    int puntajes = 0;
 
     void keyPressEvent(QKeyEvent *evento);
     QTimer *timerE;

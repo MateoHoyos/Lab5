@@ -18,6 +18,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setStyleSheet("background-color:black;");
 
 
+    ui->puntos->setText("Puntaje: " + QString::number(puntajes));
+
+
     Pacman =new pacman(40,40);
     scene->addItem(Pacman);
 
@@ -89,10 +92,16 @@ void MainWindow::keyPressEvent(QKeyEvent *evento){
            if(Pacman->collidesWithItem(monedas.at(i))){
                scene->removeItem(monedas.at(i));
                monedas.removeAt(i);
-               puntajes = puntajes+1;
+               puntajes++;
+               ui->puntos->setText("Puntaje: " + QString::number(puntajes));
 
            }
        }
+
+
+
+
+
 
     }
 
@@ -115,9 +124,15 @@ void MainWindow::keyPressEvent(QKeyEvent *evento){
             if(Pacman->collidesWithItem(monedas.at(i))){
                 scene->removeItem(monedas.at(i));
                 monedas.removeAt(i);
+                puntajes++;
+                ui->puntos->setText("Puntaje: " + QString::number(puntajes));
 
             }
         }
+
+
+
+
 
 
 
@@ -144,8 +159,13 @@ void MainWindow::keyPressEvent(QKeyEvent *evento){
               if(Pacman->collidesWithItem(monedas.at(i))){
                   scene->removeItem(monedas.at(i));
                   monedas.removeAt(i);
+                  puntajes++;
+                  ui->puntos->setText("Puntaje: " + QString::number(puntajes));
               }
           }
+
+
+
 
     }
 
@@ -169,10 +189,18 @@ void MainWindow::keyPressEvent(QKeyEvent *evento){
                if(Pacman->collidesWithItem(monedas.at(i))){
                    scene->removeItem(monedas.at(i));
                    monedas.removeAt(i);
+                   puntajes++;
+                   ui->puntos->setText("Puntaje: " + QString::number(puntajes));
                }
            }
 
+
+
+
+
     }
 }
+
+
 
 
