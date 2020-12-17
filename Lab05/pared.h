@@ -3,23 +3,17 @@
 #include <QGraphicsItem>
 #include <QPainter>
 
-#include <QGraphicsPixmapItem>
-class pared: public QGraphicsPixmapItem //herencia
+
+class pared: public QGraphicsItem
 {
-    //int w,h;
-    //int posx, posy;
-
-    QPixmap *image;
-    QRectF boundingRect() const;
+    int w,h;
+    int posx, posy;
 public:
-    pared(short x, short y,short type);
-
-    ~pared() {
-        delete image;
-    };
-
-    //QRectF boundingRect() const;
-    //void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
+    pared(int w_, int h_, int x, int y);
+    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 };
+
+
 
 #endif // PARED_H

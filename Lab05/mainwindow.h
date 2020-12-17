@@ -12,6 +12,7 @@
 #include <QTimer>
 
 #include "pacman.h"
+#include "pared.h"
 
 
 
@@ -26,6 +27,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+    QList<pared *> laberito;
 
 private:
 
