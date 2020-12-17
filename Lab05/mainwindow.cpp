@@ -17,36 +17,49 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setScene(scene);
     ui->graphicsView->setStyleSheet("background-color:black;");
 
+
     Pacman =new pacman(40,40);
     scene->addItem(Pacman);
 
 
+    //puntos
+
+    for (int i = 85; i < 600 ; i+= 40){
+            monedas.push_back(new puntos(4,i,40));scene->addItem(monedas.back());
+     }
+
+    for (int a = 80; a < 600 ; a+= 40){
+
+        for (int i = 45; i < 600 ; i+= 40){
+            monedas.push_back(new puntos(4,i,a));scene->addItem(monedas.back());
+        }
+    }
 
 
-       laberito.push_back(new pared(1500, 30, -5, -5)); scene->addItem(laberito.back());
-       laberito.push_back(new pared(30, 1010, -7, -5)); scene->addItem(laberito.back());
-       laberito.push_back(new pared(1500, 30, -5, 480)); scene->addItem(laberito.back());
-       laberito.push_back(new pared(30, 1010, 480, -5)); scene->addItem(laberito.back());
+
+    //laberito
+
+    laberito.push_back(new pared(1500, 30, -5, -5)); scene->addItem(laberito.back());
+    laberito.push_back(new pared(1500, 30, 0, 430)); scene->addItem(laberito.back());
+    laberito.push_back(new pared(30, 1010, 475, -5)); scene->addItem(laberito.back());
+    laberito.push_back(new pared(30, 1010, -7, -5)); scene->addItem(laberito.back());
 
 
-        laberito.push_back(new pared(30, 150, 60, 60)); scene->addItem(laberito.back());
-        laberito.push_back(new pared(30, 190, 60, 250)); scene->addItem(laberito.back());
+    laberito.push_back(new pared(30, 150, 70, 60)); scene->addItem(laberito.back());
+    laberito.push_back(new pared(30, 125, 70, 260)); scene->addItem(laberito.back());
+    laberito.push_back(new pared(30, 125, 150, 300)); scene->addItem(laberito.back());
+    laberito.push_back(new pared(30, 120, 310, 310)); scene->addItem(laberito.back());
+    laberito.push_back(new pared(30, 125, 230, 260)); scene->addItem(laberito.back());
+    laberito.push_back(new pared(30, 280, 390, 90)); scene->addItem(laberito.back());
 
-        laberito.push_back(new pared(150, 30, 90, 60)); scene->addItem(laberito.back());
-        laberito.push_back(new pared(180, 30, 300, 60)); scene->addItem(laberito.back());
-        laberito.push_back(new pared(30, 190, 130, 130)); scene->addItem(laberito.back());
+    laberito.push_back(new pared(150, 30, 100, 60)); scene->addItem(laberito.back());
+    laberito.push_back(new pared(150, 30, 310, 60)); scene->addItem(laberito.back());
 
-        laberito.push_back(new pared(150, 30, 160, 130)); scene->addItem(laberito.back());
-        laberito.push_back(new pared(150, 30, 130, 360)); scene->addItem(laberito.back());
+    laberito.push_back(new pared(60, 60, 150, 150)); scene->addItem(laberito.back());
+    laberito.push_back(new pared(30, 40, 150, 210)); scene->addItem(laberito.back());
 
-        laberito.push_back(new pared(150, 10, 130, 430)); scene->addItem(laberito.back());
-        laberito.push_back(new pared(10,  50, 130, 430)); scene->addItem(laberito.back());
-
-        laberito.push_back(new pared(100, 100, 210, 220)); scene->addItem(laberito.back());
-
-        laberito.push_back(new pared(30, 120, 340, 360)); scene->addItem(laberito.back());
-        laberito.push_back(new pared(10, 250, 420, 150)); scene->addItem(laberito.back());
-        laberito.push_back(new pared(10, 220, 350, 90)); scene->addItem(laberito.back());
+    laberito.push_back(new pared(60, 60, 280, 150)); scene->addItem(laberito.back());
+    laberito.push_back(new pared(30, 40, 310, 210)); scene->addItem(laberito.back());
 
 
 
@@ -71,6 +84,16 @@ void MainWindow::keyPressEvent(QKeyEvent *evento){
             }
         }
 
+
+        for (int i = 0;i < monedas.size();i++) {
+           if(Pacman->collidesWithItem(monedas.at(i))){
+               scene->removeItem(monedas.at(i));
+               monedas.removeAt(i);
+               puntajes = puntajes+1;
+
+           }
+       }
+
     }
 
 
@@ -85,6 +108,18 @@ void MainWindow::keyPressEvent(QKeyEvent *evento){
                 Pacman->left();
             }
         }
+
+
+
+        for (int i = 0;i < monedas.size();i++) {
+            if(Pacman->collidesWithItem(monedas.at(i))){
+                scene->removeItem(monedas.at(i));
+                monedas.removeAt(i);
+
+            }
+        }
+
+
 
     }
 
@@ -103,6 +138,15 @@ void MainWindow::keyPressEvent(QKeyEvent *evento){
             }
         }
 
+
+
+        for (int i = 0;i < monedas.size();i++) {
+              if(Pacman->collidesWithItem(monedas.at(i))){
+                  scene->removeItem(monedas.at(i));
+                  monedas.removeAt(i);
+              }
+          }
+
     }
 
 
@@ -120,6 +164,15 @@ void MainWindow::keyPressEvent(QKeyEvent *evento){
             }
         }
 
+
+        for (int i = 0;i < monedas.size();i++) {
+               if(Pacman->collidesWithItem(monedas.at(i))){
+                   scene->removeItem(monedas.at(i));
+                   monedas.removeAt(i);
+               }
+           }
+
     }
 }
+
 

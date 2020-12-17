@@ -12,12 +12,14 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     pacman.cpp \
-    pared.cpp
+    pared.cpp \
+    puntos.cpp
 
 HEADERS += \
     mainwindow.h \
     pacman.h \
-    pared.h
+    pared.h \
+    puntos.h
 
 FORMS += \
     mainwindow.ui

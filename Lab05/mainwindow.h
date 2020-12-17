@@ -2,17 +2,23 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTimer>
+#include <iostream>
+#include <string>
 #include <QPainter>
 #include <QGraphicsItem>
-#include <QRect>
-#include <QtDebug>
-#include <QGraphicsScene>
+#include <QRectF>
 #include <QDesktopWidget>
+#include <QDebug>
+#include <QGraphicsScene>
 #include <QKeyEvent>
-#include <QTimer>
+#include <conio.h>
+#include <QMessageBox>
+
 
 #include "pacman.h"
 #include "pared.h"
+#include "puntos.h"
 
 
 
@@ -29,6 +35,10 @@ public:
     ~MainWindow();
 
     QList<pared *> laberito;
+    QList<puntos *> monedas;
+
+private slots:
+
 
 private:
 
@@ -38,6 +48,7 @@ private:
     pacman *Pacman;
 
     float x, y, ancho, alto;
+    int puntajes = 0, num = 0;
 
     void keyPressEvent(QKeyEvent *evento);
     QTimer *timerE;
