@@ -30,6 +30,14 @@ MainWindow::MainWindow(QWidget *parent)
     Pacman =new pacman(40,40);
     scene->addItem(Pacman);
 
+    Enemigo =new enemigo(440,400);
+    scene->addItem(Enemigo);
+
+    timerE = new QTimer();
+    connect(timerE, SIGNAL(timeout()), this, SLOT(movimiento_enemigo()));
+    timerE->start(100);
+
+
 
     //puntos
 
@@ -78,20 +86,132 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::delay(short mili)
+{
+    QTime sleep_time = QTime::currentTime().addMSecs(mili);
+    while (QTime::currentTime() < sleep_time) QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}
+
 
 void MainWindow::funcionActivacionTimer(){
     ui->lcdNumber->display(acomulado);
     acomulado--;
-    if(acomulado==-1){
-        life--;
-        ui->vida->setText("Vidas: " + QString::number(life));
-        if(life==0){
+    if(acomulado<=-1){
+        life--;        
+        if(life<=0){
             ui->puntos->setText("Puntaje: " + QString::number(puntajes));
             QMessageBox::about (this,":c" , "\nPerdiste");
+            bandera=false;
             mapa1();
         }
+        ui->vida->setText("Vidas: " + QString::number(life));
         acomulado=30;
     }
+}
+
+void MainWindow::reset()
+{
+
+    /*Pacman(40,40);
+    timerE = new QTimer();
+    connect(timerE, SIGNAL(timeout()), this, SLOT(movimiento_enemigo()));
+    timerE->start(100);*/
+}
+
+void MainWindow::movimiento_enemigo()
+{
+    if (Enemigo->x() < Pacman->x()){
+          Enemigo->right();
+          for (int i = 0;i < laberito.size();i++) {
+              if(Enemigo->collidesWithItem(laberito.at(i))){
+                  Enemigo->left();
+              }
+          }
+          if (Enemigo->collidesWithItem(Pacman)){
+
+              life--;
+              delay(800);
+              ui->vida->setText("Vidas: " + QString::number(life));
+              if(life<=0){
+                  //timerE->stop();
+                  bandera=false;
+                  ui->puntos->setText("Puntaje: " + QString::number(puntajes));
+                  QMessageBox::about (this,":c" , "\nPerdiste");
+                  mapa1();
+              }
+              //reset();
+
+          }
+      }
+      else if (Enemigo->x() > Pacman->x()){
+          Enemigo->left();
+          for (int i = 0;i < laberito.size();i++) {
+              if(Enemigo->collidesWithItem(laberito.at(i))){
+                  Enemigo->right();
+              }
+          }
+          if (Enemigo->collidesWithItem(Pacman)){
+
+              life--;
+              delay(800);
+              ui->vida->setText("Vidas: " + QString::number(life));
+              if(life<=0){
+                  //timerE->stop();
+                  bandera=false;
+                  ui->puntos->setText("Puntaje: " + QString::number(puntajes));
+                  QMessageBox::about (this,":c" , "\nPerdiste");
+                  mapa1();
+              }
+              //reset();
+
+          }
+      }
+      if (Enemigo->y() < Pacman->y()){
+          Enemigo->down();
+          for (int i = 0;i < laberito.size();i++) {
+              if(Enemigo->collidesWithItem(laberito.at(i))){
+                  Enemigo->up();
+              }
+          }
+          if (Enemigo->collidesWithItem(Pacman)){
+
+              life--;
+              delay(800);
+              ui->vida->setText("Vidas: " + QString::number(life));
+              if(life<=0){
+                  //timerE->stop();
+                  bandera=false;
+                  ui->puntos->setText("Puntaje: " + QString::number(puntajes));
+                  QMessageBox::about (this,":c" , "\nPerdiste");
+                  mapa1();
+              }
+              //reset();
+
+          }
+      }
+      else if (Enemigo->y() > Pacman->y()){
+          Enemigo->up();
+          for (int i = 0;i < laberito.size();i++) {
+              if(Enemigo->collidesWithItem(laberito.at(i))){
+                  Enemigo->down();
+              }
+          }
+          if (Enemigo->collidesWithItem(Pacman)){
+
+              life--;
+              delay(800);
+              ui->vida->setText("Vidas: " + QString::number(life));
+              if(life<=0){
+                  //timerE->stop();
+                  bandera=false;
+                  ui->puntos->setText("Puntaje: " + QString::number(puntajes));
+                  QMessageBox::about (this,":c" , "\nPerdiste");
+                  mapa1();
+              }
+              //reset();
+
+          }
+      }
 }
 
 void MainWindow::vidas()
@@ -128,6 +248,13 @@ void MainWindow::mapa1()
 
     Pacman =new pacman(40,40);
     scene->addItem(Pacman);
+
+    Enemigo =new enemigo(440,400);
+    scene->addItem(Enemigo);
+
+    if(bandera==true){timerE = new QTimer();
+    connect(timerE, SIGNAL(timeout()), this, SLOT(movimiento_enemigo()));
+    timerE->start(100);}
 
 
     //puntos
@@ -196,6 +323,11 @@ void MainWindow::mapa2()
     scene->addItem(Pacman);
 
 
+    Enemigo =new enemigo(440,300);
+    scene->addItem(Enemigo);
+
+
+
     //puntos
 
     for (int i = 85; i < 600 ; i+= 40){
@@ -258,6 +390,10 @@ void MainWindow::mapa3()
 
     Pacman =new pacman(40,40);
     scene->addItem(Pacman);
+
+
+    Enemigo =new enemigo(440,400);
+    scene->addItem(Enemigo);
 
 
     //puntos
@@ -337,8 +473,10 @@ void MainWindow::keyPressEvent(QKeyEvent *evento){
         }
 
         if (puntajes>=205&&contador==2){
+            timerE->stop();
             ui->puntos->setText("Puntaje: " + QString::number(puntajes));
             QMessageBox::about (this,":v" , "\nWIN");
+            bandera=true;
             mapa1();
         }
 
@@ -386,8 +524,10 @@ void MainWindow::keyPressEvent(QKeyEvent *evento){
         }
 
         if (puntajes>=205&&contador==2){
+            timerE->stop();
             ui->puntos->setText("Puntaje: " + QString::number(puntajes));
             QMessageBox::about (this,":v" , "\nWIN");
+            bandera=true;
             mapa1();
         }
 
@@ -436,8 +576,10 @@ void MainWindow::keyPressEvent(QKeyEvent *evento){
         }
 
         if (puntajes>=205&&contador==2){
+            timerE->stop();
             ui->puntos->setText("Puntaje: " + QString::number(puntajes));
             QMessageBox::about (this,":v" , "\nWIN");
+            bandera=true;
             mapa1();
         }
 
@@ -482,8 +624,10 @@ void MainWindow::keyPressEvent(QKeyEvent *evento){
         }
 
         if (puntajes>=205&&contador==2){
+            timerE->stop();
             ui->puntos->setText("Puntaje: " + QString::number(puntajes));
             QMessageBox::about (this,":v" , "\nWIN");
+            bandera=true;
             mapa1();
         }
 
