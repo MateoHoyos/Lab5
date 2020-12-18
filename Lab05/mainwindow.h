@@ -19,7 +19,7 @@
 #include "pacman.h"
 #include "pared.h"
 #include "puntos.h"
-
+#include "enemigo.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -37,12 +37,18 @@ public:
     QList<pared *> laberito;
     QList<puntos *> monedas;
 
+    void delay(short mili);
+
+
 private slots:  
     void mapa1();
     void mapa2();
     void mapa3();
     void funcionActivacionTimer();
+    void reset();
 
+public slots:
+    void movimiento_enemigo();
 
 
 private:
@@ -54,7 +60,10 @@ private:
 
     QGraphicsScene *scene;
     pacman *Pacman;
+    enemigo *Enemigo;
 
+
+    bool bandera=false;
     float x, y, ancho, alto;
     int puntajes = 0, contador=0, acomulado=30,life=3;
 
