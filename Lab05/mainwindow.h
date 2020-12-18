@@ -37,8 +37,10 @@ public:
     QList<pared *> laberito;
     QList<puntos *> monedas;
 
-private slots:
-
+private slots:  
+    void mapa1();
+    void mapa2();
+    void mapa3();
 
 
 
@@ -50,7 +52,7 @@ private:
     pacman *Pacman;
 
     float x, y, ancho, alto;
-    int puntajes = 0;
+    int puntajes = 0, contador=0, acomulado=0;
 
     void keyPressEvent(QKeyEvent *evento);
     QTimer *timerE;
