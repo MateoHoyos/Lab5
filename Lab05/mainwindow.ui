@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>519</width>
-    <height>511</height>
+    <width>522</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="font">
@@ -16,7 +16,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>:v</string>
+   <string>PAC-MAN</string>
   </property>
   <property name="windowIcon">
    <iconset resource="imagenes.qrc">
@@ -33,31 +33,12 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>0</y>
-      <width>131</width>
-      <height>39</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Comic Sans MS</family>
-      <pointsize>21</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>PAC-MAN</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="puntos">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>10</y>
-      <width>151</width>
+      <x>210</x>
+      <y>0</y>
+      <width>131</width>
       <height>29</height>
      </rect>
     </property>
@@ -73,12 +54,12 @@
      <string>Puntaje:</string>
     </property>
    </widget>
-   <widget class="QLabel" name="total">
+   <widget class="QLabel" name="vida">
     <property name="geometry">
      <rect>
       <x>390</x>
-      <y>10</y>
-      <width>131</width>
+      <y>0</y>
+      <width>91</width>
       <height>29</height>
      </rect>
     </property>
@@ -91,8 +72,38 @@
      </font>
     </property>
     <property name="text">
-     <string>Total:</string>
+     <string>Vidas:</string>
     </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>0</y>
+      <width>147</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="tiempo">
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+         <pointsize>16</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Tiempo:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLCDNumber" name="lcdNumber"/>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -100,7 +111,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>519</width>
+     <width>522</width>
      <height>22</height>
     </rect>
    </property>
