@@ -16,7 +16,11 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>:v</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="imagenes.qrc">
+    <normaloff>:/imagenes/v.png</normaloff>:/imagenes/v.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QGraphicsView" name="graphicsView">
@@ -48,6 +52,48 @@
      <string>PAC-MAN</string>
     </property>
    </widget>
+   <widget class="QLabel" name="puntos">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>171</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Comic Sans MS</family>
+      <pointsize>16</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Puntaje:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="total">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>0</y>
+      <width>171</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Comic Sans MS</family>
+      <pointsize>16</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Total:</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -61,6 +107,8 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="imagenes.qrc"/>
+ </resources>
  <connections/>
 </ui>
