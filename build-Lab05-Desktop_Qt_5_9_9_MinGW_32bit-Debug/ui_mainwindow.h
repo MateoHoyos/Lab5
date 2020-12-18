@@ -14,7 +14,9 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QGraphicsView>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLCDNumber>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
@@ -28,9 +30,12 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QGraphicsView *graphicsView;
-    QLabel *label;
     QLabel *puntos;
-    QLabel *total;
+    QLabel *vida;
+    QWidget *widget;
+    QHBoxLayout *horizontalLayout;
+    QLabel *tiempo;
+    QLCDNumber *lcdNumber;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -38,7 +43,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(519, 511);
+        MainWindow->resize(522, 500);
         QFont font;
         font.setFamily(QStringLiteral("Comic Sans MS"));
         MainWindow->setFont(font);
@@ -50,30 +55,40 @@ public:
         graphicsView = new QGraphicsView(centralwidget);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
         graphicsView->setGeometry(QRect(10, 40, 502, 502));
-        label = new QLabel(centralwidget);
-        label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(190, 0, 131, 39));
-        QFont font1;
-        font1.setFamily(QStringLiteral("Comic Sans MS"));
-        font1.setPointSize(21);
-        label->setFont(font1);
         puntos = new QLabel(centralwidget);
         puntos->setObjectName(QStringLiteral("puntos"));
-        puntos->setGeometry(QRect(0, 10, 151, 29));
-        QFont font2;
-        font2.setFamily(QStringLiteral("Comic Sans MS"));
-        font2.setPointSize(16);
-        font2.setBold(false);
-        font2.setWeight(50);
-        puntos->setFont(font2);
-        total = new QLabel(centralwidget);
-        total->setObjectName(QStringLiteral("total"));
-        total->setGeometry(QRect(390, 10, 131, 29));
-        total->setFont(font2);
+        puntos->setGeometry(QRect(210, 0, 131, 29));
+        QFont font1;
+        font1.setFamily(QStringLiteral("Comic Sans MS"));
+        font1.setPointSize(16);
+        font1.setBold(false);
+        font1.setWeight(50);
+        puntos->setFont(font1);
+        vida = new QLabel(centralwidget);
+        vida->setObjectName(QStringLiteral("vida"));
+        vida->setGeometry(QRect(390, 0, 91, 29));
+        vida->setFont(font1);
+        widget = new QWidget(centralwidget);
+        widget->setObjectName(QStringLiteral("widget"));
+        widget->setGeometry(QRect(20, 0, 147, 31));
+        horizontalLayout = new QHBoxLayout(widget);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        tiempo = new QLabel(widget);
+        tiempo->setObjectName(QStringLiteral("tiempo"));
+        tiempo->setFont(font1);
+
+        horizontalLayout->addWidget(tiempo);
+
+        lcdNumber = new QLCDNumber(widget);
+        lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
+
+        horizontalLayout->addWidget(lcdNumber);
+
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QStringLiteral("menubar"));
-        menubar->setGeometry(QRect(0, 0, 519, 22));
+        menubar->setGeometry(QRect(0, 0, 522, 22));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QStringLiteral("statusbar"));
@@ -86,10 +101,10 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", ":v", Q_NULLPTR));
-        label->setText(QApplication::translate("MainWindow", "PAC-MAN", Q_NULLPTR));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "PAC-MAN", Q_NULLPTR));
         puntos->setText(QApplication::translate("MainWindow", "Puntaje:", Q_NULLPTR));
-        total->setText(QApplication::translate("MainWindow", "Total:", Q_NULLPTR));
+        vida->setText(QApplication::translate("MainWindow", "Vidas:", Q_NULLPTR));
+        tiempo->setText(QApplication::translate("MainWindow", "Tiempo:", Q_NULLPTR));
     } // retranslateUi
 
 };

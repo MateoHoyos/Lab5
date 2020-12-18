@@ -41,10 +41,14 @@ private slots:
     void mapa1();
     void mapa2();
     void mapa3();
+    void funcionActivacionTimer();
 
 
 
 private:
+
+    void vidas();
+    QTimer *cronometro=new QTimer(this);
 
     Ui::MainWindow *ui;
 
@@ -52,7 +56,7 @@ private:
     pacman *Pacman;
 
     float x, y, ancho, alto;
-    int puntajes = 0, contador=0, acomulado=0;
+    int puntajes = 0, contador=0, acomulado=30,life=3;
 
     void keyPressEvent(QKeyEvent *evento);
     QTimer *timerE;

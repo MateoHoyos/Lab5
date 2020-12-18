@@ -1,11 +1,16 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <qtimer.h>
+#include "qdatetime.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    connect(cronometro, SIGNAL(timeout()), this, SLOT(funcionActivacionTimer()));
+    cronometro->start(1000);
+
 
 
     QRect desktop = QApplication::desktop()->screenGeometry();
@@ -19,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     ui->puntos->setText("Puntaje: " + QString::number(puntajes));
-    ui->total->setText("Total: " + QString::number(acomulado));
+    ui->vida->setText("Vidas: " + QString::number(life));
 
 
     Pacman =new pacman(40,40);
@@ -66,16 +71,6 @@ MainWindow::MainWindow(QWidget *parent)
     laberito.push_back(new pared(30, 40, 310, 210)); scene->addItem(laberito.back());
 
 
-
-
-
-
-
-
-
-
-
-
 }
 
 MainWindow::~MainWindow()
@@ -84,13 +79,35 @@ MainWindow::~MainWindow()
 }
 
 
+void MainWindow::funcionActivacionTimer(){
+    ui->lcdNumber->display(acomulado);
+    acomulado--;
+    if(acomulado==-1){
+        life--;
+        ui->vida->setText("Vidas: " + QString::number(life));
+        if(life==0){
+            ui->puntos->setText("Puntaje: " + QString::number(puntajes));
+            QMessageBox::about (this,":c" , "\nPerdiste");
+            mapa1();
+        }
+        acomulado=30;
+    }
+}
+
+void MainWindow::vidas()
+{
+
+}
+
+
 
 
 void MainWindow::mapa1()
 {
 
-    acomulado=0;
-    ui->total->setText("Total: " + QString::number(acomulado));
+    acomulado=30;
+    life=3;
+    ui->vida->setText("Vidas: " + QString::number(life));
 
     laberito.clear();
     monedas.clear();
@@ -155,12 +172,12 @@ void MainWindow::mapa1()
 
 void MainWindow::mapa2()
 {
-    acomulado+=puntajes;
-    ui->total->setText("Total: " + QString::number(acomulado));
+    //acomulado+=puntajes;
+    //ui->total->setText("Total: " + QString::number(acomulado));
 
     laberito.clear();
     monedas.clear();
-    puntajes=0;
+   // puntajes=0;
     QRect desktop = QApplication::desktop()->screenGeometry();
     x = desktop.x();
     y = desktop.y();
@@ -219,12 +236,12 @@ void MainWindow::mapa2()
 void MainWindow::mapa3()
 {
 
-    acomulado+=puntajes;
-    ui->total->setText("Total: " + QString::number(acomulado));
+    //acomulado+=puntajes;
+    //ui->total->setText("Total: " + QString::number(acomulado));
 
     laberito.clear();
     monedas.clear();
-    puntajes=0;
+    //puntajes=0;
     QRect desktop = QApplication::desktop()->screenGeometry();
     x = desktop.x();
     y = desktop.y();
@@ -280,7 +297,11 @@ void MainWindow::mapa3()
 }
 
 
+
+
 void MainWindow::keyPressEvent(QKeyEvent *evento){
+
+
 
     if(evento->key() == Qt::Key_A){
         Pacman->left();
@@ -295,6 +316,7 @@ void MainWindow::keyPressEvent(QKeyEvent *evento){
 
         for (int i = 0;i < monedas.size();i++) {
            if(Pacman->collidesWithItem(monedas.at(i))){
+               acomulado=30;
                scene->removeItem(monedas.at(i));
                monedas.removeAt(i);
                puntajes++;
@@ -309,14 +331,13 @@ void MainWindow::keyPressEvent(QKeyEvent *evento){
             contador=1;
         }
 
-        if(puntajes>=69&&contador==1){ //69 puntos
+        if(puntajes>=137&&contador==1){ //69 puntos
             mapa3();
             contador=2;
         }
 
-        if (puntajes>=68&&contador==2){
-            acomulado+=puntajes;
-            ui->total->setText("Total: " + QString::number(acomulado));
+        if (puntajes>=205&&contador==2){
+            ui->puntos->setText("Puntaje: " + QString::number(puntajes));
             QMessageBox::about (this,":v" , "\nWIN");
             mapa1();
         }
@@ -345,6 +366,7 @@ void MainWindow::keyPressEvent(QKeyEvent *evento){
 
         for (int i = 0;i < monedas.size();i++) {
             if(Pacman->collidesWithItem(monedas.at(i))){
+                acomulado=30;
                 scene->removeItem(monedas.at(i));
                 monedas.removeAt(i);
                 puntajes++;
@@ -358,14 +380,13 @@ void MainWindow::keyPressEvent(QKeyEvent *evento){
             contador=1;
         }
 
-        if(puntajes>=69&&contador==1){ //69 puntos
+        if(puntajes>=137&&contador==1){ //69 puntos
             mapa3();
             contador=2;
         }
 
-        if (puntajes>=68&&contador==2){
-            acomulado+=puntajes;
-            ui->total->setText("Total: " + QString::number(acomulado));
+        if (puntajes>=205&&contador==2){
+            ui->puntos->setText("Puntaje: " + QString::number(puntajes));
             QMessageBox::about (this,":v" , "\nWIN");
             mapa1();
         }
@@ -395,6 +416,7 @@ void MainWindow::keyPressEvent(QKeyEvent *evento){
 
         for (int i = 0;i < monedas.size();i++) {
               if(Pacman->collidesWithItem(monedas.at(i))){
+                  acomulado=30;
                   scene->removeItem(monedas.at(i));
                   monedas.removeAt(i);
                   puntajes++;
@@ -408,14 +430,13 @@ void MainWindow::keyPressEvent(QKeyEvent *evento){
             contador=1;
         }
 
-        if(puntajes>=69&&contador==1){ //69 puntos
+        if(puntajes>=137&&contador==1){ //69 puntos
             mapa3();
             contador=2;
         }
 
-        if (puntajes>=68&&contador==2){
-            acomulado+=puntajes;
-            ui->total->setText("Total: " + QString::number(acomulado));
+        if (puntajes>=205&&contador==2){
+            ui->puntos->setText("Puntaje: " + QString::number(puntajes));
             QMessageBox::about (this,":v" , "\nWIN");
             mapa1();
         }
@@ -441,6 +462,8 @@ void MainWindow::keyPressEvent(QKeyEvent *evento){
 
         for (int i = 0;i < monedas.size();i++) {
                if(Pacman->collidesWithItem(monedas.at(i))){
+
+                   acomulado=30;
                    scene->removeItem(monedas.at(i));
                    monedas.removeAt(i);
                    puntajes++;
@@ -453,14 +476,13 @@ void MainWindow::keyPressEvent(QKeyEvent *evento){
             contador=1;
         }
 
-        if(puntajes>=69&&contador==1){ //69 puntos
+        if(puntajes>=137&&contador==1){ //69 puntos
             mapa3();
             contador=2;
         }
 
-        if (puntajes>=68&&contador==2){
-            acomulado+=puntajes;
-            ui->total->setText("Total: " + QString::number(acomulado));
+        if (puntajes>=205&&contador==2){
+            ui->puntos->setText("Puntaje: " + QString::number(puntajes));
             QMessageBox::about (this,":v" , "\nWIN");
             mapa1();
         }
