@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>532</width>
-    <height>521</height>
+    <width>519</width>
+    <height>511</height>
    </rect>
   </property>
   <property name="font">
@@ -28,8 +28,8 @@
      <rect>
       <x>10</x>
       <y>40</y>
-      <width>510</width>
-      <height>510</height>
+      <width>502</width>
+      <height>502</height>
      </rect>
     </property>
    </widget>
@@ -39,7 +39,7 @@
       <x>190</x>
       <y>0</y>
       <width>131</width>
-      <height>31</height>
+      <height>39</height>
      </rect>
     </property>
     <property name="font">
@@ -55,10 +55,10 @@
    <widget class="QLabel" name="puntos">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>0</y>
-      <width>171</width>
-      <height>31</height>
+      <x>0</x>
+      <y>10</y>
+      <width>151</width>
+      <height>29</height>
      </rect>
     </property>
     <property name="font">
@@ -76,10 +76,10 @@
    <widget class="QLabel" name="total">
     <property name="geometry">
      <rect>
-      <x>370</x>
-      <y>0</y>
-      <width>171</width>
-      <height>31</height>
+      <x>390</x>
+      <y>10</y>
+      <width>131</width>
+      <height>29</height>
      </rect>
     </property>
     <property name="font">
@@ -100,7 +100,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>532</width>
+     <width>519</width>
      <height>22</height>
     </rect>
    </property>
